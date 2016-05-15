@@ -1,0 +1,20 @@
+name: mitchell-prelude
+version: 0.1.0.0
+
+library:
+  source-dirs: .
+  dependencies:
+    - async
+    - base
+    - bytestring
+    - containers
+    - deepseq
+    - extra
+    - ghc-prim
+    - mtl
+    - stm
+    - text
+    - transformers
+    - transformers-base
+    - semigroups
+    - unordered-containers
