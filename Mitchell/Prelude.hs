@@ -480,14 +480,14 @@ traceIO = Debug.Trace.traceIO
 show :: (GHC.Show.Show a, ConvertibleStrings GHC.Base.String b) => a -> b
 show x = cs (GHC.Show.show x)
 
-putStr :: MonadBase System.IO.IO m => Data.Text.Text -> m ()
-putStr = liftBase Data.Function.. Data.Text.IO.putStr
+putStr :: MonadIO m => Data.Text.Text -> m ()
+putStr = liftIO Data.Function.. Data.Text.IO.putStr
 
-putStrLn :: MonadBase System.IO.IO m => Data.Text.Text -> m ()
-putStrLn = liftBase Data.Function.. Data.Text.IO.putStrLn
+putStrLn :: MonadIO m => Data.Text.Text -> m ()
+putStrLn = liftIO Data.Function.. Data.Text.IO.putStrLn
 
-print :: (GHC.Show.Show a, MonadBase System.IO.IO m) => a -> m ()
-print = liftBase Data.Function.. System.IO.print
+print :: (GHC.Show.Show a, MonadIO m) => a -> m ()
+print = liftIO Data.Function.. System.IO.print
 
 --------------------------------------------------------------------------------
 -- bytestring
