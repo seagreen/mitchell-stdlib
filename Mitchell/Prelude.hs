@@ -361,6 +361,7 @@ import qualified GHC.Generics
 import qualified GHC.Num
 import qualified GHC.Prim
 import qualified GHC.Show
+import qualified GHC.Stack
 import qualified GHC.Types
 import qualified System.IO
 import qualified Text.Printf
@@ -448,11 +449,11 @@ zero = Data.Monoid.mempty
 (++) = Data.Monoid.mappend
 
 undefined :: a
-undefined = GHC.Err.undefined
+undefined = GHC.Stack.errorWithStackTrace "undefined"
 {-# WARNING undefined "'undefined' remains in code" #-}
 
 error :: GHC.Base.String -> a
-error = GHC.Err.error
+error = GHC.Stack.errorWithStackTrace
 {-# WARNING error "'error' remains in code" #-}
 
 -- | Renamed 'Debug.Trace.traceStack'.
@@ -588,7 +589,7 @@ ordNub l = go Data.Set.empty l
       else x : go (Data.Set.insert x s) xs
 
 notImplemented :: a
-notImplemented = GHC.Err.error "Not implemented"
+notImplemented = GHC.Stack.errorWithStackTrace "Not implemented"
 {-# WARNING notImplemented "'notImplemented' remains in code" #-}
 
 class ConvertibleStrings a b where
