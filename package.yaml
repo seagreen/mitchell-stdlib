@@ -1,6 +1,8 @@
 name: mitchell-prelude
 version: 0.1.0.0
 
+ghc-options: -Wall
+
 library:
   source-dirs: .
   dependencies:

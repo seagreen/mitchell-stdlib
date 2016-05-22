@@ -29,6 +29,7 @@ module Mitchell.Prelude
   , Control.Exception.tryJust
   , Control.Exception.evaluate
   , Control.Exception.assert
+  , assertM
   , Control.Exception.bracket
   , Control.Exception.bracket_
   , Control.Exception.bracketOnError
@@ -359,10 +360,8 @@ import qualified Data.Text.Lazy.Encoding
 import qualified Data.Typeable
 import qualified Debug.Trace
 import qualified GHC.Base
-import qualified GHC.Err
 import qualified GHC.Exts
 import qualified GHC.Generics
-import qualified GHC.Num
 import qualified GHC.Prim
 import qualified GHC.Show
 import qualified GHC.Stack
