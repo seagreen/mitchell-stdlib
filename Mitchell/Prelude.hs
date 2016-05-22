@@ -251,7 +251,6 @@ module Mitchell.Prelude
   , putState
   , modifyState
   , modifyState'
-  , module Control.Monad.Trans
     -- stm
   , Control.Monad.STM.STM
   , atomicallySTM
@@ -260,6 +259,7 @@ module Mitchell.Prelude
   , Control.Monad.STM.throwSTM
   , Control.Monad.STM.catchSTM
   , module Control.Concurrent.STM.TVar
+  , readTVarCheck
   , module Control.Concurrent.STM.TMVar
   , module Control.Concurrent.STM.TChan
   , module Control.Concurrent.STM.TQueue
@@ -274,7 +274,9 @@ module Mitchell.Prelude
   , Data.Text.Encoding.decodeUtf8
     -- transformers-base
   , module Control.Monad.Base
-
+  , module Control.Monad.Trans.Class
+  , Control.Monad.IO.Class.MonadIO
+  , io
     -- Miscellaneous new functionality
   , eitherA
   , leftToMaybe
@@ -323,9 +325,11 @@ import qualified Control.Exception
 import qualified Control.Monad
 import qualified Control.Monad.Except
 import qualified Control.Monad.Extra
+import qualified Control.Monad.IO.Class
 import qualified Control.Monad.Reader
 import qualified Control.Monad.State
 import qualified Control.Monad.STM
+import qualified Control.Monad.Trans.Class
 import qualified Data.ByteString
 import qualified Data.ByteString.Char8
 import qualified Data.ByteString.Builder
@@ -545,10 +549,22 @@ retrySTM = Control.Monad.STM.retry
 checkSTM :: Bool -> Control.Monad.STM.STM ()
 checkSTM = Control.Monad.STM.check
 
+readTVarCheck :: (a -> Bool) -> Control.Concurrent.STM.TVar.TVar a -> Control.Monad.STM.STM a
+readTVarCheck f var = do
+  x <- readTVar var
+  checkSTM (f x)
+  Control.Applicative.pure x
+
 --------------------------------------------------------------------------------
 -- text
 
 type LText = Data.Text.Lazy.Text
+
+--------------------------------------------------------------------------------
+-- transformers
+
+io :: Control.Monad.IO.Class.MonadIO m => GHC.Types.IO a -> m a
+io = Control.Monad.IO.Class.liftIO
 
 --------------------------------------------------------------------------------
 -- Miscellaneous new functionality
@@ -570,9 +586,9 @@ maybeToRight l = Data.Maybe.maybe (Left l) Right
 maybeToLeft :: b -> Data.Maybe.Maybe a -> Data.Either.Either a b
 maybeToLeft r = Data.Maybe.maybe (Data.Either.Right r) Data.Either.Left
 
-maybeToBool :: Data.Maybe.Maybe a -> Data.Bool.Bool
-maybeToBool Data.Maybe.Nothing = Data.Bool.False
-maybeToBool _                  = Data.Bool.True
+maybeToBool :: Data.Maybe.Maybe a -> Bool
+maybeToBool Data.Maybe.Nothing = False
+maybeToBool _                  = True
 
 applyN :: Int -> (a -> a) -> a -> a
 applyN 0 _ = Data.Function.id
