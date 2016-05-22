@@ -394,6 +394,9 @@ lift5 f a b c d e = f
   Control.Applicative.<*> d
   Control.Applicative.<*> e
 
+assertM :: Control.Monad.Monad m => Bool -> m ()
+assertM b = Control.Exception.assert b (Control.Applicative.pure ())
+
 identity :: a -> a
 identity = GHC.Base.id
 
