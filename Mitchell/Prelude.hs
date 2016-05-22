@@ -542,11 +542,13 @@ modifyState' = Control.Monad.State.modify'
 --------------------------------------------------------------------------------
 -- stm
 
-atomicallySTM :: Control.Monad.STM.STM a -> GHC.Types.IO a
-atomicallySTM = Control.Monad.STM.atomically
+atomicallySTM :: MonadIO m => Control.Monad.STM.STM a -> m a
+atomicallySTM = io GHC.Base.. Control.Monad.STM.atomically
+{-# INLINE atomicallySTM #-}
 
 retrySTM :: Control.Monad.STM.STM a
 retrySTM = Control.Monad.STM.retry
+{-# INLINE retrySTM #-}
 
 checkSTM :: Bool -> Control.Monad.STM.STM ()
 checkSTM = Control.Monad.STM.check
@@ -565,7 +567,7 @@ type LText = Data.Text.Lazy.Text
 --------------------------------------------------------------------------------
 -- transformers
 
-io :: Control.Monad.IO.Class.MonadIO m => GHC.Types.IO a -> m a
+io :: MonadIO m => GHC.Types.IO a -> m a
 io = Control.Monad.IO.Class.liftIO
 
 --------------------------------------------------------------------------------
