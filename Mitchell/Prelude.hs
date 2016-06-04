@@ -149,8 +149,7 @@ module Mitchell.Prelude
   , Data.Maybe.catMaybes
   , Data.Maybe.mapMaybe
   , unsafeFromJust
-  , Data.Monoid.Monoid
-  , Data.Monoid.mconcat
+  , Data.Monoid.Monoid(..)
   , zero
   , (++)
   , Data.Ord.Ord(..)
