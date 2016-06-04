@@ -21,20 +21,11 @@ module Mitchell.Prelude
   , Control.Applicative.Alternative(..)
   , Control.Applicative.optional
   , module Control.Concurrent
-  , Control.Exception.SomeException
+  , Control.Exception.SomeException(..)
   , Control.Exception.Exception(..)
-  , Control.Exception.catch
-  , Control.Exception.catchJust
-  , Control.Exception.try
-  , Control.Exception.tryJust
   , Control.Exception.evaluate
   , Control.Exception.assert
   , assertM
-  , Control.Exception.bracket
-  , Control.Exception.bracket_
-  , Control.Exception.bracketOnError
-  , Control.Exception.finally
-  , Control.Exception.onException
   , Control.Monad.Monad((>>=), (>>), return)
   , Control.Monad.MonadPlus(..)
   , (Control.Monad.=<<)
@@ -206,6 +197,28 @@ module Mitchell.Prelude
   , Data.Set.Set
     -- deepseq
   , module Control.DeepSeq
+    -- exceptions
+  , Control.Monad.Catch.MonadThrow(..)
+  , Control.Monad.Catch.MonadCatch(..)
+  , Control.Monad.Catch.MonadMask(..)
+  , Control.Monad.Catch.mask_
+  , Control.Monad.Catch.uninterruptibleMask_
+  , Control.Monad.Catch.catchAll
+  , Control.Monad.Catch.catchIOError
+  , Control.Monad.Catch.catchJust
+  , Control.Monad.Catch.catchIf
+  , Control.Monad.Catch.handle
+  , Control.Monad.Catch.handleAll
+  , Control.Monad.Catch.handleIOError
+  , Control.Monad.Catch.handleJust
+  , Control.Monad.Catch.handleIf
+  , Control.Monad.Catch.try
+  , Control.Monad.Catch.tryJust
+  , Control.Monad.Catch.onException
+  , Control.Monad.Catch.bracket
+  , Control.Monad.Catch.bracket_
+  , Control.Monad.Catch.finally
+  , Control.Monad.Catch.bracketOnError
     -- extra
   , Control.Monad.Extra.whenJust
   , Control.Monad.Extra.whenJustM
@@ -323,6 +336,7 @@ import GHC.Real
 import qualified Control.Applicative
 import qualified Control.Exception
 import qualified Control.Monad
+import qualified Control.Monad.Catch
 import qualified Control.Monad.Except
 import qualified Control.Monad.Extra
 import qualified Control.Monad.IO.Class

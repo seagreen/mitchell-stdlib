@@ -11,6 +11,7 @@ library:
     - bytestring
     - containers
     - deepseq
+    - exceptions
     - extra
     - ghc-prim
     - mtl
