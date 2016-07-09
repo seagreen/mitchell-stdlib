@@ -1,23 +1,23 @@
 name: mitchell-prelude
-version: 0.1.0.0
+version: 0.3.0
 
-ghc-options: -Wall
+ghc-options: -Weverything
 
 library:
   source-dirs: .
   dependencies:
     - async
-    - base
+    - base >= 4.9 && < 5.0
     - bytestring
     - containers
     - deepseq
-    - exceptions
     - extra
     - ghc-prim
+    - microlens-platform
     - mtl
     - stm
     - text
     - transformers
     - transformers-base
-    - semigroups
+    - safe-exceptions
     - unordered-containers

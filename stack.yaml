@@ -1,1 +1,21 @@
-resolver: lts-5.16
+resolver: ghc-8.0.1
+extra-deps:
+  - async-2.1.0
+  - exceptions-0.8.2.1
+  - extra-1.4.10
+  - hashable-1.2.4.0
+  - microlens-0.4.5.0
+  - microlens-ghc-0.4.5.0
+  - microlens-mtl-0.1.8.0
+  - microlens-platform-0.3.2.0
+  - microlens-th-0.4.0.0
+  - mtl-2.2.1
+  - primitive-0.6.1.0
+  - safe-exceptions-0.1.1.0
+  - semigroups-0.18.2
+  - stm-2.4.4.1
+  - text-1.2.2.1
+  - transformers-base-0.4.4
+  - transformers-compat-0.5.1.4
+  - unordered-containers-0.2.7.1
+  - vector-0.11.0.0

@@ -3,29 +3,29 @@
 -- see: https://github.com/sol/hpack
 
 name:           mitchell-prelude
-version:        0.1.0.0
+version:        0.3.0
 build-type:     Simple
 cabal-version:  >= 1.10
 
 library
   hs-source-dirs:
       .
-  ghc-options: -Wall
+  ghc-options: -Weverything
   build-depends:
       async
-    , base
+    , base >= 4.9 && < 5.0
     , bytestring
     , containers
     , deepseq
-    , exceptions
     , extra
     , ghc-prim
+    , microlens-platform
     , mtl
     , stm
     , text
     , transformers
     , transformers-base
-    , semigroups
+    , safe-exceptions
     , unordered-containers
   exposed-modules:
       Mitchell.Prelude
